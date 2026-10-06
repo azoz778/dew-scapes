@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Dew Scapes: landscape design, planting, irrigation and garden care. Scroll to watch a garden grow from seed to shade.">
+<meta property="og:title" content="Dew Scapes">
+<meta property="og:description" content="Every garden begins small. Scroll to watch it grow.">
+<meta property="og:image" content="https://dew-scapes.azoz.uk/og.jpg">
+<meta name="theme-color" content="#0E1F16">
+<title>Dew Scapes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* Layout: one pinned film stage that scroll scrubs from seed to shade tree, chapters fade over it, booking form after. Single photographic look by choice. */
+:root {
+  --ink: #0E1F16;        /* deep garden green, text on light */
+  --paper: #F3F0E7;      /* limestone */
+  --leaf: #B9D98A;       /* new-growth green accent */
+  --glass: rgba(14, 31, 22, 0.42);
+  --line: rgba(243, 240, 231, 0.32);
+  --muted: #5B6B60;
+  --display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --body: "Geist", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: dark;
+}
+:root[lang="ar"] { --display: "IBM Plex Sans Arabic", "Geeza Pro", Tahoma, sans-serif; --body: "IBM Plex Sans Arabic", "Geeza Pro", Tahoma, sans-serif; }
+* { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+body { margin: 0; background: var(--ink); color: var(--paper); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; }
+
+/* nav */
+.nav { position: fixed; z-index: 10; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: calc(env(safe-area-inset-top, 0px) + 22px) clamp(16px, 4vw, 48px) 22px; }
+.brand { font-weight: 600; letter-spacing: 0.18em; font-size: 13px; text-decoration: none; text-transform: uppercase; }
+:root[lang="ar"] .brand { letter-spacing: 0; font-size: 16px; }
+.nav-links { display: flex; gap: 28px; font-size: 14px; }
+.nav-links a { text-decoration: none; opacity: 0.85; }
+.nav-links a:hover { opacity: 1; }
+.nav-right { display: flex; align-items: center; gap: 18px; font-size: 14px; }
+.lang { background: none; border: 1px solid var(--line); color: inherit; font: inherit; border-radius: 999px; padding: 8px 14px; min-height: 40px; cursor: pointer; }
+.cta-line { text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; white-space: nowrap; }
+
+/* film stage */
+.film { position: relative; height: 900vh; }
+.stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+canvas#film { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: #2a2a24; }
+.scrim { position: absolute; inset: 0; pointer-events: none; background:
+  linear-gradient(180deg, rgba(8,18,12,0.55) 0%, rgba(8,18,12,0) 22%),
+  linear-gradient(0deg, rgba(8,18,12,0.72) 0%, rgba(8,18,12,0) 48%); }
+
+.chapter { position: absolute; left: clamp(16px, 4vw, 48px); right: clamp(16px, 4vw, 48px); bottom: clamp(40px, 9vh, 88px); max-width: 640px; opacity: 0; transform: translateY(18px); transition: none; pointer-events: none; }
+:root[dir="rtl"] .chapter { left: auto; }
+.chapter.on { pointer-events: auto; }
+.eyebrow { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--leaf); margin: 0 0 14px; }
+:root[lang="ar"] .eyebrow { letter-spacing: 0; font-size: 14px; }
+.chapter h1, .chapter h2 { font-family: var(--display); font-weight: 400; margin: 0; letter-spacing: -0.015em; text-wrap: balance; }
+.chapter h1 { font-size: clamp(48px, 8.5vw, 112px); line-height: 0.95; }
+.chapter h2 { font-size: clamp(38px, 6vw, 76px); line-height: 1; }
+:root[lang="ar"] .chapter h1, :root[lang="ar"] .chapter h2 { font-weight: 500; letter-spacing: 0; line-height: 1.2; }
+.chapter h1 em, .chapter h2 em { font-style: italic; }
+.chapter p.lede { margin: 18px 0 0; max-width: 44ch; font-size: 17px; opacity: 0.92; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; background: var(--paper); color: var(--ink); text-decoration: none; font-weight: 500; border-radius: 2px; }
+.btn.ghost { background: none; color: var(--paper); border: 1px solid var(--line); }
+
+.panel { margin-top: 24px; background: var(--glass); backdrop-filter: blur(14px) saturate(1.1); -webkit-backdrop-filter: blur(14px) saturate(1.1); border: 1px solid var(--line); padding: 22px 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 28px; }
+.panel h3 { margin: 0 0 4px; font-size: 16px; font-weight: 600; }
+.panel p { margin: 0; font-size: 14px; opacity: 0.85; }
+.steps { list-style: none; padding: 0; margin: 24px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; counter-reset: s; }
+.steps li { border-top: 1px solid var(--line); padding-top: 12px; counter-increment: s; min-width: 0; }
+.steps li::before { content: counter(s, decimal-leading-zero); display: block; font-size: 12px; color: var(--leaf); margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+.steps strong { display: block; font-size: 15px; font-weight: 600; }
+.steps span { font-size: 13px; opacity: 0.85; }
+
+/* growth tracker */
+.tracker { position: absolute; right: clamp(16px, 4vw, 48px); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 14px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+:root[dir="rtl"] .tracker { right: auto; left: clamp(16px, 4vw, 48px); }
+:root[lang="ar"] .tracker { letter-spacing: 0; font-size: 13px; }
+.tracker li { list-style: none; display: flex; align-items: center; gap: 10px; opacity: 0.45; transition: opacity .3s; }
+.tracker li::before { content: ""; width: 22px; height: 1px; background: currentColor; transition: width .3s; }
+.tracker li.on { opacity: 1; }
+.tracker li.on::before { width: 40px; background: var(--leaf); }
+.tracker ol { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.hint { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.75; }
+
+/* booking */
+.book { background: var(--paper); color: var(--ink); padding-block: clamp(64px, 10vw, 120px); padding-inline: clamp(16px, 4vw, 48px); }
+.book-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 88px); align-items: start; }
+.book h2 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 5.5vw, 72px); line-height: 1; margin: 0; text-wrap: balance; }
+:root[lang="ar"] .book h2 { font-weight: 500; line-height: 1.2; }
+.book .intro p { color: var(--muted); max-width: 40ch; margin: 18px 0 0; }
+.book dl { margin: 28px 0 0; display: grid; gap: 14px; }
+.book dt { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+:root[lang="ar"] .book dt { letter-spacing: 0; font-size: 13px; }
+.book dd { margin: 2px 0 0; font-size: 16px; }
+form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 20px; }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.field.full { grid-column: 1 / -1; }
+label { font-size: 13px; font-weight: 500; }
+input, select, textarea { font: inherit; color: var(--ink); background: #FBFAF6; border: 1px solid #C9C4B4; border-radius: 2px; padding: 12px 14px; min-height: 48px; width: 100%; }
+textarea { min-height: 96px; resize: vertical; }
+.submit { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.submit button { font: inherit; font-weight: 500; min-height: 52px; padding: 0 28px; background: var(--ink); color: var(--paper); border: none; border-radius: 2px; cursor: pointer; }
+.note { font-size: 13px; color: var(--muted); }
+.done { grid-column: 1 / -1; background: #E6EEDB; border: 1px solid #B8C9A0; padding: 16px 18px; }
+footer { background: var(--ink); color: var(--paper); padding-block: 28px; padding-inline: clamp(16px, 4vw, 48px); display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; font-size: 13px; opacity: 0.9; }
+
+@media (max-width: 760px) {
+  .nav-links { display: none; }
+  .tracker { display: none; }
+  .panel { grid-template-columns: minmax(0, 1fr); }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .book-inner, form { grid-template-columns: minmax(0, 1fr); }
+  .chapter p.lede { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .tracker li, .tracker li::before { transition: none; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#top" data-i="brand">Dew Scapes</a>
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#services" data-i="navServices">Services</a>
+    <a href="#process" data-i="navProcess">Process</a>
+    <a href="#book" data-i="navBook">Book a visit</a>
+  </nav>
+  <div class="nav-right">
+    <button class="lang" id="lang" type="button" aria-label="Switch language">العربية</button>
+    <a class="cta-line" href="#book" data-i="ctaShort">Book a site visit</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="film" id="filmSection" aria-label="From seed to shade tree">
+    <div class="stage">
+      <canvas id="film" aria-hidden="true"></canvas>
+      <div class="scrim"></div>
+
+      <div class="chapter" id="c1">
+        <p class="eyebrow" data-i="c1eyebrow">Landscape design · Planting · Irrigation · Care</p>
+        <h1 data-i="c1title" data-html>Every garden begins <em>small.</em></h1>
+        <p class="lede" data-i="c1lede">We design, plant and care for private gardens, from the first seed to the shade you will sit under for decades.</p>
+        <div class="actions">
+          <a class="btn" href="#book" data-i="ctaLong">Book a site visit</a>
+          <a class="btn ghost" href="#services" id="scrollGrow" data-i="ctaGrow">Scroll to grow</a>
+        </div>
+      </div>
+
+      <div class="chapter" id="c2">
+        <p class="eyebrow" id="services" data-i="c2eyebrow">What we do</p>
+        <h2 data-i="c2title" data-html>Roots first, <em>then everything else.</em></h2>
+        <div class="panel">
+          <div><h3 data-i="s1t">Landscape design</h3><p data-i="s1d">Site survey, planting plans and drawings you approve before we dig.</p></div>
+          <div><h3 data-i="s2t">Planting</h3><p data-i="s2d">Trees, lawns and beds chosen for heat, salt and the water you have.</p></div>
+          <div><h3 data-i="s3t">Irrigation</h3><p data-i="s3d">Drip and smart controllers sized zone by zone, so nothing is wasted.</p></div>
+          <div><h3 data-i="s4t">Garden care</h3><p data-i="s4d">Scheduled visits, pruning and seasonal planting that keep it growing.</p></div>
+        </div>
+      </div>
+
+      <div class="chapter" id="c3">
+        <p class="eyebrow" id="process" data-i="c3eyebrow">How a Dew garden grows</p>
+        <h2 data-i="c3title" data-html>Four steps, <em>one gardener you know.</em></h2>
+        <ol class="steps">
+          <li><strong data-i="p1t">Visit</strong><span data-i="p1d">We walk the site, test the soil and listen.</span></li>
+          <li><strong data-i="p2t">Design</strong><span data-i="p2d">A plan and a fixed quote within days.</span></li>
+          <li><strong data-i="p3t">Build</strong><span data-i="p3d">Our own crews plant, pave and plumb.</span></li>
+          <li><strong data-i="p4t">Care</strong><span data-i="p4d">A care plan from the day we finish.</span></li>
+        </ol>
+      </div>
+
+      <div class="chapter" id="c4">
+        <p class="eyebrow" data-i="c4eyebrow">Years later</p>
+        <h2 data-i="c4title" data-html>Shade you will <em>sit under for decades.</em></h2>
+        <p class="lede" data-i="c4lede">Tell us about your garden and we will come and see it.</p>
+        <div class="actions"><a class="btn" href="#book" data-i="ctaLong">Book a site visit</a></div>
+      </div>
+
+      <div class="tracker" aria-hidden="true">
+        <ol>
+          <li data-s="0" data-i="t1">Seed</li>
+          <li data-s="1" data-i="t2">Sprout</li>
+          <li data-s="2" data-i="t3">Sapling</li>
+          <li data-s="3" data-i="t4">Shade tree</li>
+        </ol>
+      </div>
+      <div class="hint" id="hint" data-i="hint">Scroll</div>
+    </div>
+  </section>
+
+  <section class="book" id="book" aria-labelledby="bookTitle">
+    <div class="book-inner">
+      <div class="intro">
+        <h2 id="bookTitle" data-i="bTitle">Book a site visit</h2>
+        <p data-i="bLede">A garden designer visits, measures and talks through what you want. You get a plan and a fixed quote afterwards.</p>
+        <dl>
+          <div><dt data-i="bVisitL">Visit length</dt><dd data-i="bVisitV">About 45 minutes on site</dd></div>
+          <div><dt data-i="bAfterL">After the visit</dt><dd data-i="bAfterV">Planting plan and quote</dd></div>
+        </dl>
+      </div>
+      <form id="bookForm" novalidate>
+        <div class="field"><label for="name" data-i="fName">Full name</label><input id="name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="phone" data-i="fPhone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05X XXX XXXX" required></div>
+        <div class="field"><label for="district" data-i="fDistrict">District</label><input id="district" name="district" autocomplete="address-level3"></div>
+        <div class="field"><label for="size" data-i="fSize">Garden size</label>
+          <select id="size" name="size">
+            <option value="s" data-i="z1">Under 100 m²</option>
+            <option value="m" data-i="z2">100–500 m²</option>
+            <option value="l" data-i="z3">500–2,000 m²</option>
+            <option value="xl" data-i="z4">Over 2,000 m²</option>
+          </select></div>
+        <div class="field full"><label for="service" data-i="fService">What do you need?</label>
+          <select id="service" name="service">
+            <option data-i="o1">A new garden</option>
+            <option data-i="o2">Redesign an existing garden</option>
+            <option data-i="o3">Irrigation</option>
+            <option data-i="o4">Regular garden care</option>
+          </select></div>
+        <div class="field full"><label for="notes" data-i="fNotes">Anything we should know? (optional)</label><textarea id="notes" name="notes"></textarea></div>
+        <div class="submit">
+          <button type="submit" data-i="fSubmit">Request a visit</button>
+          <span class="note" data-i="fNote">Demo form: nothing is sent yet.</span>
+        </div>
+        <div class="done" id="done" hidden role="status" data-i="fDone">Thanks. In the live site this request goes straight to the Dew sales team, who call you to fix a time.</div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span data-i="foot1">Dew Scapes · part of Dew Collective</span>
+  <span data-i="foot2">Sample content, to be confirmed with Dew.</span>
+</footer>
+
+<script>
+(() => {
+  // one continuous film: three growth clips, upscaled frames (first frame of clips 2-3 dropped; it repeats the previous last frame)
+  const SEQ = [["c1", 145, 1], ["c2", 144, 2], ["c3", 144, 2]];
+  const pad = n => String(n).padStart(3, "0");
+  const srcs = [];
+  for (const [dir, count, start] of SEQ) for (let k = 0; k < count; k++) srcs.push(`frames/${dir}/${pad(start + k)}.webp`);
+  const FRAMES = srcs.length;
+
+  const canvas = document.getElementById("film");
+  const ctx = canvas.getContext("2d");
+  const frames = new Array(FRAMES);
+  let currentIndex = 0, progress = 0;
+  function load(i) { const im = new Image(); im.decoding = "async"; im.src = srcs[i]; im.onload = () => { if (Math.abs(i - currentIndex) < 3) draw(); }; frames[i] = im; }
+  // first frame now, then a coarse pass so any scroll position has something close, then the rest
+  load(0);
+  for (let i = 8; i < FRAMES; i += 8) load(i);
+  for (let i = 1; i < FRAMES; i++) if (!frames[i]) load(i);
+
+  // scroll map: [0, .06] hold seed · [.06, .94] the film · hold the tree
+  const section = document.getElementById("filmSection");
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const seg = (p, a, b) => clamp((p - a) / (b - a));
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(canvas.clientWidth * dpr);
+    canvas.height = Math.round(canvas.clientHeight * dpr);
+    draw();
+  }
+  function cover(im) {
+    const cw = canvas.width, ch = canvas.height;
+    const s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight);
+    const w = im.naturalWidth * s, h = im.naturalHeight * s;
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
+  }
+  function nearestFrame(i) {
+    for (let d = 0; d < FRAMES; d++) {
+      for (const j of [i - d, i + d]) { const f = frames[j]; if (f && f.complete && f.naturalWidth) return f; }
+    }
+    return null;
+  }
+  function draw() {
+    currentIndex = Math.round(seg(progress, 0.06, 0.94) * (FRAMES - 1));
+    const f = nearestFrame(currentIndex);
+    if (f) cover(f);
+  }
+
+  const chapters = [["c1", -1, 0.0, 0.05], ["c2", 0.14, 0.2, 0.34], ["c3", 0.44, 0.5, 0.64], ["c4", 0.84, 0.9, 2]];
+  const tracker = [...document.querySelectorAll(".tracker li")];
+  const hint = document.getElementById("hint");
+  function chapterOpacity(p, inA, inB, outA) {
+    const fadeIn = inA < 0 ? 1 : seg(p, inA, inB);
+    const fadeOut = 1 - seg(p, outA, outA + 0.05);
+    return clamp(Math.min(fadeIn, fadeOut));
+  }
+  function update() {
+    const r = section.getBoundingClientRect();
+    const total = section.offsetHeight - window.innerHeight;
+    progress = clamp(-r.top / total);
+    draw();
+    for (const [id, inA, inB, outA] of chapters) {
+      const el = document.getElementById(id);
+      const o = chapterOpacity(progress, inA, inB, outA);
+      el.style.opacity = o.toFixed(3);
+      el.style.transform = `translateY(${((1 - o) * 18).toFixed(1)}px)`;
+      el.classList.toggle("on", o > 0.5);
+    }
+    const stage = progress < 0.2 ? 0 : progress < 0.5 ? 1 : progress < 0.8 ? 2 : 3;
+    tracker.forEach((li, k) => li.classList.toggle("on", k === stage));
+    hint.style.opacity = progress < 0.03 ? 0.75 : 0;
+  }
+  let ticking = false;
+  window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { update(); ticking = false; }); } }, { passive: true });
+  window.addEventListener("resize", () => { resize(); update(); });
+  document.getElementById("scrollGrow").addEventListener("click", e => {
+    e.preventDefault();
+    window.scrollTo({ top: section.offsetTop + (section.offsetHeight - innerHeight) * 0.2, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+
+  // language
+  const AR = {
+    brand: "ديو سكيبس", navServices: "خدماتنا", navProcess: "طريقتنا", navBook: "احجز زيارة", ctaShort: "احجز زيارة للموقع",
+    c1eyebrow: "تصميم الحدائق · الزراعة · الري · العناية", c1title: "كل حديقة تبدأ <em>صغيرة.</em>",
+    c1lede: "نصمّم الحدائق الخاصة ونزرعها ونعتني بها، من أول بذرة حتى الظل الذي ستجلس تحته لعقود.",
+    ctaLong: "احجز زيارة للموقع", ctaGrow: "مرّر لتراها تنمو",
+    c2eyebrow: "ما نقدّمه", c2title: "الجذور أولاً، <em>ثم كل شيء آخر.</em>",
+    s1t: "تصميم الحدائق", s1d: "مسح الموقع ومخططات الزراعة ورسومات تعتمدها قبل أن نبدأ.",
+    s2t: "الزراعة", s2d: "أشجار ومسطحات وأحواض نختارها لتحمّل الحرارة والملوحة وكمية المياه المتاحة.",
+    s3t: "الري", s3d: "ري بالتنقيط ووحدات تحكم ذكية لكل منطقة، فلا تُهدر قطرة.",
+    s4t: "العناية بالحديقة", s4d: "زيارات مجدولة وتقليم وزراعة موسمية تُبقي حديقتك في نمو.",
+    c3eyebrow: "كيف تنمو حديقة ديو", c3title: "أربع خطوات، <em>وبستاني تعرفه.</em>",
+    p1t: "الزيارة", p1d: "نتفقد الموقع ونفحص التربة ونستمع إليك.", p2t: "التصميم", p2d: "مخطط وعرض سعر ثابت خلال أيام.",
+    p3t: "التنفيذ", p3d: "فرقنا تزرع وترصف وتمدّ الري.", p4t: "العناية", p4d: "خطة عناية من يوم التسليم.",
+    c4eyebrow: "بعد سنوات", c4title: "ظلٌّ ستجلس تحته <em>لعقود.</em>", c4lede: "حدّثنا عن حديقتك وسنأتي لنراها.",
+    t1: "بذرة", t2: "برعم", t3: "شتلة", t4: "شجرة ظل", hint: "مرّر",
+    bTitle: "احجز زيارة للموقع", bLede: "يزورك مصمم حدائق ليقيس الموقع ويتحدث معك عمّا تريد، ثم تحصل على مخطط وعرض سعر ثابت.",
+    bVisitL: "مدة الزيارة", bVisitV: "نحو ٤٥ دقيقة في الموقع", bAfterL: "بعد الزيارة", bAfterV: "مخطط زراعة وعرض سعر",
+    fName: "الاسم الكامل", fPhone: "رقم الجوال", fDistrict: "الحي", fSize: "مساحة الحديقة",
+    z1: "أقل من ١٠٠ م²", z2: "١٠٠–٥٠٠ م²", z3: "٥٠٠–٢٬٠٠٠ م²", z4: "أكثر من ٢٬٠٠٠ م²",
+    fService: "ما الذي تحتاجه؟", o1: "حديقة جديدة", o2: "إعادة تصميم حديقة قائمة", o3: "الري", o4: "عناية دورية بالحديقة",
+    fNotes: "هل هناك ما يجب أن نعرفه؟ (اختياري)", fSubmit: "اطلب زيارة", fNote: "نموذج تجريبي: لا يُرسل شيء حالياً.",
+    fDone: "شكراً لك. في الموقع الفعلي يصل طلبك مباشرة إلى فريق مبيعات ديو، وسيتصلون بك لتحديد موعد.",
+    foot1: "ديو سكيبس · جزء من ديو كوليكتيف", foot2: "محتوى تجريبي، قيد التأكيد مع ديو."
+  };
+  const EN = {};
+  document.querySelectorAll("[data-i]").forEach(el => { EN[el.dataset.i] = el.hasAttribute("data-html") ? el.innerHTML : el.textContent; });
+  const langBtn = document.getElementById("lang");
+  function setLang(l) {
+    const dict = l === "ar" ? AR : EN;
+    document.documentElement.lang = l;
+    document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+    document.querySelectorAll("[data-i]").forEach(el => {
+      const v = dict[el.dataset.i]; if (v == null) return;
+      if (el.hasAttribute("data-html")) el.innerHTML = v; else el.textContent = v;
+    });
+    langBtn.textContent = l === "ar" ? "English" : "العربية";
+    langBtn.setAttribute("aria-label", l === "ar" ? "Switch to English" : "التبديل إلى العربية");
+    try { localStorage.setItem("dew-lang", l); } catch (e) {}
+  }
+  langBtn.addEventListener("click", () => setLang(document.documentElement.lang === "ar" ? "en" : "ar"));
+  let saved = null; try { saved = localStorage.getItem("dew-lang"); } catch (e) {}
+  if (saved === "ar") setLang("ar");
+
+  // demo form
+  const form = document.getElementById("bookForm");
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const nameEl = document.getElementById("name"), phoneEl = document.getElementById("phone");
+    const name = nameEl.value.trim(), phone = phoneEl.value.replace(/\s/g, "");
+    let bad = null;
+    if (!name) bad = nameEl; else if (!/^(\+?966|0)?5\d{8}$/.test(phone)) bad = phoneEl;
+    nameEl.setAttribute("aria-invalid", String(!name));
+    phoneEl.setAttribute("aria-invalid", String(bad === phoneEl));
+    if (bad) { bad.focus(); return; }
+    document.getElementById("done").hidden = false;
+  });
+
+  if (!document.documentElement.lang) document.documentElement.lang = "en";
+  resize(); update();
+})();
+</script>
+
+</body>
+</html>
