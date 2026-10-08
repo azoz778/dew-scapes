@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Dew Drops · Landscapes, Elevated</title>
+<meta name="description" content="Dew Drops creates and cares for exceptional landscapes across private residences, corporate properties, hotels, and resorts. Jeddah, Al Shatee District.">
+<meta property="og:title" content="Dew Drops · Landscapes, Elevated">
+<meta property="og:description" content="Creating and caring for exceptional landscapes across private residences, corporate properties, hotels, and resorts.">
+<meta property="og:image" content="https://dew-drops.azoz.uk/og.jpg">
+<meta name="theme-color" content="#394F3D">
+<link rel="icon" href="../../img/mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500&display=swap">
+<style>
+/* Layout: the growth film pins first (seed to shade tree, four chapters), then the Dew Drops profile as editorial sections, then contact. Brand values taken from the Dew Drops profile PDF. */
+:root {
+  --green: #394F3D;      /* profile background green */
+  --ink: #2F3F36;        /* profile body text */
+  --sage: #5E7D6A;       /* profile secondary green */
+  --gold: #DDC291;       /* profile gold accent (on green only) */
+  --mist: #D9E1DB;       /* profile light text on green */
+  --muted: #56605A;
+  --line: #DCE2DD;
+  --paper: #FFFFFF;
+  --glass: rgba(33, 48, 38, 0.46);
+  --sans: "Calibri Light", "Calibri", "Carlito", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+:root[lang="ar"] { --sans: "IBM Plex Sans Arabic", "Geeza Pro", Tahoma, sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-weight: 300; font-size: 18px; line-height: 1.6; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+h1, h2, h3 { font-weight: 300; margin: 0; text-wrap: balance; letter-spacing: -0.005em; }
+:root[lang="ar"] h1, :root[lang="ar"] h2 { font-weight: 400; }
+.eyebrow { font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--sage); margin: 0 0 18px; font-weight: 400; }
+:root[lang="ar"] .eyebrow { letter-spacing: 0; font-size: 15px; }
+.eyebrow .n { margin-inline-end: 14px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); }
+.gold { color: var(--gold); }
+.lead-accent { color: var(--sage); font-size: 22px; line-height: 1.5; margin-top: 22px; }
+ul.dots { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 6px; }
+ul.dots li { position: relative; padding-inline-start: 18px; }
+ul.dots li::before { content: ""; position: absolute; inset-inline-start: 0; top: 0.72em; width: 6px; height: 6px; border-radius: 50%; background: var(--sage); }
+
+/* nav */
+.nav { position: fixed; z-index: 20; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: calc(env(safe-area-inset-top, 0px) + 16px) clamp(16px, 4vw, 48px) 16px; color: #fff; transition: background .3s; }
+.nav.solid { background: rgba(57, 79, 61, 0.96); }
+.nav .logo img { height: 46px; width: auto; }
+.nav-links { display: flex; gap: 28px; font-size: 15px; }
+.nav-links a { text-decoration: none; opacity: 0.9; }
+.nav-links a:hover { opacity: 1; color: var(--gold); }
+.nav-right { display: flex; align-items: center; gap: 16px; font-size: 15px; }
+.lang { background: none; border: 1px solid rgba(255,255,255,0.4); color: inherit; font: inherit; border-radius: 999px; padding: 6px 14px; min-height: 40px; cursor: pointer; }
+.cta-line { text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; white-space: nowrap; }
+
+/* film */
+.film { position: relative; height: 760vh; background: #1d2a21; }
+.stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; color: #fff; }
+canvas#film { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: #26332a; }
+.scrim { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(20,32,24,0.55) 0%, rgba(20,32,24,0) 24%), linear-gradient(0deg, rgba(20,32,24,0.78) 0%, rgba(20,32,24,0) 52%); }
+.chapter { position: absolute; left: clamp(16px, 4vw, 48px); right: clamp(16px, 4vw, 48px); bottom: clamp(40px, 9vh, 88px); max-width: 680px; opacity: 0; pointer-events: none; }
+:root[dir="rtl"] .chapter { left: auto; }
+.chapter.on { pointer-events: auto; }
+.chapter .eyebrow { color: var(--gold); }
+.chapter h1 { font-size: clamp(52px, 8.4vw, 116px); line-height: 0.98; }
+.chapter h2 { font-size: clamp(36px, 5.4vw, 70px); line-height: 1.04; }
+.chapter h1 em, .chapter h2 em { font-style: normal; color: var(--gold); }
+.chapter p.lede { margin: 18px 0 0; max-width: 46ch; font-size: 19px; color: var(--mist); }
+.chapter .styles { margin-top: 14px; font-size: 17px; letter-spacing: 0.04em; color: var(--gold); }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.btn { display: inline-flex; align-items: center; min-height: 50px; padding: 0 26px; background: var(--gold); color: var(--green); text-decoration: none; font-weight: 400; font-size: 17px; border-radius: 2px; border: none; cursor: pointer; font-family: inherit; }
+.btn.ghost { background: none; color: #fff; border: 1px solid rgba(255,255,255,0.45); }
+.tracker { position: absolute; right: clamp(16px, 4vw, 48px); top: 50%; transform: translateY(-50%); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; }
+:root[dir="rtl"] .tracker { right: auto; left: clamp(16px, 4vw, 48px); }
+:root[lang="ar"] .tracker { letter-spacing: 0; font-size: 14px; }
+.tracker ol { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.tracker li { list-style: none; display: flex; align-items: center; gap: 10px; opacity: 0.5; transition: opacity .3s; }
+.tracker li::before { content: ""; width: 22px; height: 1px; background: currentColor; transition: width .3s; }
+.tracker li.on { opacity: 1; }
+.tracker li.on::before { width: 40px; background: var(--gold); }
+.hint { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.8; }
+
+/* sections */
+section.block { padding-block: clamp(72px, 10vw, 128px); }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
+.split img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.split h2, .band h2, .head h2 { font-size: clamp(34px, 4.4vw, 56px); line-height: 1.08; }
+.split p { margin: 18px 0 0; color: var(--muted); }
+.band { background: var(--green); color: #fff; position: relative; overflow: hidden; }
+.band .eyebrow { color: var(--gold); }
+.band p { color: var(--mist); }
+.band .mark { position: absolute; inset-inline-end: -60px; top: -40px; width: 340px; opacity: 0.14; pointer-events: none; }
+.band.photo .split img { aspect-ratio: 4 / 5; }
+.big-words { font-size: clamp(40px, 5.4vw, 68px); line-height: 1.08; }
+
+.head { max-width: 760px; margin-bottom: 48px; }
+.head p { color: var(--muted); margin: 16px 0 0; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 40px; }
+.card { min-width: 0; }
+.card img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.card .eyebrow { margin: 22px 0 10px; }
+.card h3 { font-size: 30px; line-height: 1.15; }
+.card p { margin: 12px 0 0; color: var(--muted); }
+.card .tag { margin-top: 14px; color: var(--sage); font-size: 19px; }
+.cols2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; }
+.sublabel { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--sage); margin-top: 16px; }
+:root[lang="ar"] .sublabel { letter-spacing: 0; font-size: 14px; }
+
+.factors { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; margin-top: 40px; }
+.factors div { border-top: 1px solid rgba(221,194,145,0.6); padding-top: 14px; font-size: 19px; }
+.steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 32px; counter-reset: s; }
+.steps li { border-top: 1px solid var(--line); padding-top: 18px; counter-increment: s; }
+.steps li::before { content: counter(s, decimal-leading-zero); display: block; font-size: 14px; color: var(--sage); margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+.steps h3, .standards h3 { font-size: 24px; }
+.steps p { margin: 6px 0 0; color: var(--muted); font-size: 17px; }
+.standards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 32px; }
+.standards div { border-top: 1px solid rgba(221,194,145,0.55); padding-top: 18px; }
+.standards h3 { color: var(--gold); }
+.standards p { margin: 6px 0 0; font-size: 17px; }
+.diff { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 40px; }
+.diff div { border-top: 1px solid var(--line); padding-top: 16px; font-size: 22px; color: var(--ink); }
+
+.closing { text-align: center; }
+.closing img { width: min(320px, 70%); margin: 0 auto 26px; }
+.closing p { font-style: italic; font-size: 24px; color: var(--gold); }
+
+.contact { background: #F4F6F3; }
+.contact-inner { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 88px); align-items: start; }
+.contact dl { margin: 28px 0 0; display: grid; gap: 14px; }
+.contact dt { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); }
+:root[lang="ar"] .contact dt { letter-spacing: 0; font-size: 14px; }
+.contact dd { margin: 2px 0 0; font-size: 19px; }
+form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 20px; }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.field.full { grid-column: 1 / -1; }
+label { font-size: 15px; font-weight: 400; }
+input, select, textarea { font: inherit; font-weight: 400; color: var(--ink); background: #fff; border: 1px solid #C8D1CA; border-radius: 2px; padding: 12px 14px; min-height: 50px; width: 100%; }
+textarea { min-height: 110px; resize: vertical; }
+.submit { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.submit .btn { background: var(--green); color: #fff; }
+.note { font-size: 14px; color: var(--muted); }
+.done { grid-column: 1 / -1; background: #E3EBE4; border: 1px solid #B9C9BC; padding: 16px 18px; }
+footer { background: var(--green); color: var(--mist); padding-block: 36px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 16px 32px; justify-content: space-between; align-items: center; font-size: 15px; }
+footer img { height: 40px; width: auto; }
+
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .tracker { display: none; }
+  .split, .contact-inner, .cards, form { grid-template-columns: minmax(0, 1fr); }
+  .split img { aspect-ratio: 4 / 3; }
+  .band.reverse .split img { order: -1; }
+  .steps, .standards, .diff { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .factors { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nav .logo img { height: 38px; }
+  .cta-line { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .tracker li, .tracker li::before, .nav { transition: none; } }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Dew Drops, back to top"><img src="../../img/logo.png" alt="Dew Drops"></a>
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#services" data-i="navServices">Services</a>
+    <a href="#process" data-i="navProcess">How we work</a>
+    <a href="#standards" data-i="navStandards">Our standards</a>
+    <a href="#contact" data-i="navContact">Contact</a>
+  </nav>
+  <div class="nav-right">
+    <button class="lang" id="lang" type="button" aria-label="التبديل إلى العربية">العربية</button>
+    <a class="cta-line" href="#contact" data-i="ctaShort">Get in touch</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="film" id="filmSection" aria-label="Dew Drops">
+    <div class="stage">
+      <canvas id="film" aria-hidden="true"></canvas>
+      <div class="scrim"></div>
+
+      <div class="chapter" id="c1">
+        <p class="eyebrow" data-i="c1e">Presentation · Care · Management · Stewardship</p>
+        <h1 data-i="c1t" data-html>Landscapes, <em>Elevated.</em></h1>
+        <p class="lede" data-i="c1l">Creating and caring for exceptional landscapes across private residences, corporate properties, hotels, and resorts.</p>
+        <div class="actions">
+          <a class="btn" href="#contact" data-i="ctaLong">Get in touch</a>
+          <a class="btn ghost" href="#about" id="scrollGrow" data-i="ctaScroll">Scroll</a>
+        </div>
+      </div>
+
+      <div class="chapter" id="c2">
+        <p class="eyebrow" data-i="c2e">Beauty begins with health</p>
+        <h2 data-i="c2t" data-html>A landscape’s beauty begins <em>beneath the surface.</em></h2>
+        <p class="lede" data-i="c2l">Soil condition, irrigation, nutrition, light, climate, and seasonal changes all affect how plants grow. Because a landscape should not simply look beautiful. It should thrive.</p>
+      </div>
+
+      <div class="chapter" id="c3">
+        <p class="eyebrow" data-i="c3e">Your vision preserved</p>
+        <h2 data-i="c3t" data-html>Every landscape has <em>its own identity.</em></h2>
+        <p class="styles" data-i="c3s">Tropical · Desert · Mediterranean · Contemporary · Formal · Natural</p>
+        <p class="lede" data-i="c3l">As gardens mature, we refine them carefully, allowing them to evolve without losing their vision.</p>
+      </div>
+
+      <div class="chapter" id="c4">
+        <p class="eyebrow" data-i="c4e">The Dew Drops difference</p>
+        <h2 data-i="c4t" data-html>Maintenance is what we do. <em>Stewardship is how we think.</em></h2>
+        <p class="lede" data-i="c4l">A landscape is a living investment. Our role goes beyond its day-to-day appearance.</p>
+        <div class="actions"><a class="btn" href="#contact" data-i="ctaLong">Get in touch</a></div>
+      </div>
+
+      <div class="tracker" aria-hidden="true">
+        <ol>
+          <li data-i="t1">Understand</li>
+          <li data-i="t2">Protect</li>
+          <li data-i="t3">Refine</li>
+          <li data-i="t4">Thrive</li>
+        </ol>
+      </div>
+      <div class="hint" id="hint" data-i="hint">Scroll</div>
+    </div>
+  </section>
+
+  <!-- 02 Beyond maintenance -->
+  <section class="block" id="about">
+    <div class="wrap split">
+      <img src="../../img/p02.jpg" alt="A shaded garden path between palms and planting" loading="lazy">
+      <div>
+        <p class="eyebrow" data-i="a_e">Beyond maintenance</p>
+        <h2 data-i="a_t">A landscape is a living environment</h2>
+        <p data-i="a_p1">At Dew Drops, we believe exceptional landscape maintenance goes far beyond keeping a garden looking beautiful.</p>
+        <p data-i="a_p2">A landscape is a living environment that requires knowledge, observation, and continuous care.</p>
+        <p data-i="a_p3">We combine:</p>
+        <ul class="dots">
+          <li data-i="a_b1">Horticultural expertise</li>
+          <li data-i="a_b2">Technical understanding</li>
+          <li data-i="a_b3">Meticulous attention to detail</li>
+        </ul>
+        <p data-i="a_p4">to preserve the health, character, and long-term beauty of every landscape.</p>
+        <p class="lead-accent" data-i="a_tag">Understand. Protect. Continually refine.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Beauty begins with health -->
+  <section class="block band reverse" id="health">
+    <img class="mark" src="../../img/mark.png" alt="">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow" data-i="h_e">Beauty begins with health</p>
+        <h2 data-i="h_t">A landscape’s beauty begins beneath the surface.</h2>
+        <p data-i="h_p1">Soil condition, irrigation, nutrition, light, climate, and seasonal changes all affect how plants grow.</p>
+        <p data-i="h_p2">By observing these elements continuously, we:</p>
+        <ul class="dots">
+          <li data-i="h_b1">Identify concerns early</li>
+          <li data-i="h_b2">Respond appropriately</li>
+          <li data-i="h_b3">Support long-term plant health</li>
+        </ul>
+        <p class="lead-accent gold" data-i="h_tag">Because a landscape should not simply look beautiful. It should thrive.</p>
+      </div>
+      <img src="../../img/p03.jpg" alt="Gloved hands working rich soil around a young plant" loading="lazy">
+    </div>
+  </section>
+
+  <!-- 04 Resort-level care -->
+  <section class="block" id="resort">
+    <div class="wrap split">
+      <img src="../../img/p04.jpg" alt="A villa terrace with bougainvillea, lawn and palms" loading="lazy">
+      <div>
+        <p class="eyebrow" data-i="r_e">Resort-level care</p>
+        <h2 class="big-words" data-i="r_t" data-html>Immaculate.<br>Serene.<br>Consistent.</h2>
+        <p data-i="r_p1">We apply the standards of luxury resort landscapes to the private and corporate environments we manage.</p>
+        <p data-i="r_p2">Every element matters, from the health and structure of planting to the smallest finishing details that shape the overall impression.</p>
+        <p data-i="r_p3">Our aim is to create environments that feel:</p>
+        <p class="lead-accent" data-i="r_tag">Effortlessly beautiful and always ready to be enjoyed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 Your vision preserved -->
+  <section class="block band reverse" id="vision">
+    <img class="mark" src="../../img/mark.png" alt="">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow" data-i="v_e">Your vision preserved</p>
+        <h2 data-i="v_t">Every landscape has its own identity</h2>
+        <p class="lead-accent gold" data-i="v_s">Tropical · Desert · Mediterranean<br>Contemporary · Formal · Natural</p>
+        <p data-i="v_p1">We take time to understand the original design intent and the client's personal preferences.</p>
+        <p class="lead-accent gold" data-i="v_tag">As gardens mature, we refine them carefully, allowing them to evolve without losing their vision.</p>
+      </div>
+      <img src="../../img/p05.jpg" alt="A wide lawn under tall palms" loading="lazy">
+    </div>
+  </section>
+
+  <!-- 06-11 Services -->
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow" data-i="s_e">What we do</p>
+        <h2 data-i="s_t">Creating and caring for exceptional landscapes</h2>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <img src="../../img/p06.jpg" alt="A private garden with cycads, stones and lawn" loading="lazy">
+          <p class="eyebrow" data-i="k1e">Private residences</p>
+          <h3 data-i="k1t">Exceptional care, quietly delivered.</h3>
+          <p data-i="k1p">Maintaining a private residence requires more than technical skill. It requires discretion, consistency, and respect for the client's environment. Our teams work with careful scheduling, professional supervision, and minimal disruption.</p>
+          <p class="tag" data-i="k1g">Luxury landscape standards with private-home discretion.</p>
+        </article>
+        <article class="card">
+          <img src="../../img/p07.jpg" alt="A pool terrace framed by palms and planting" loading="lazy">
+          <p class="eyebrow" data-i="k2e">Corporate &amp; commercial spaces</p>
+          <h3 data-i="k2t">First impressions begin outside.</h3>
+          <p data-i="k2p">The landscape surrounding a property is often the first impression people receive. We provide structured landscape maintenance for corporate and commercial environments, focusing on:</p>
+          <ul class="dots"><li data-i="k2b1">Presentation</li><li data-i="k2b2">Reliability</li><li data-i="k2b3">Efficiency</li><li data-i="k2b4">Long-term value</li></ul>
+        </article>
+        <article class="card">
+          <img src="../../img/p08.jpg" alt="Two gardeners inspecting plants and taking notes" loading="lazy">
+          <p class="eyebrow" data-i="k3e">Horticultural &amp; botanical care</p>
+          <h3 data-i="k3t">Beyond the surface.</h3>
+          <p data-i="k3p">Our maintenance programmes are built around plant health. Rather than simply responding to symptoms, we look for the underlying causes.</p>
+          <div class="cols2">
+            <div><p class="sublabel" data-i="k3m">We monitor</p><ul class="dots"><li data-i="k3m1">Soil condition</li><li data-i="k3m2">Pruning requirements</li><li data-i="k3m3">Signs of pests or disease</li><li data-i="k3m4">Nutrition</li><li data-i="k3m5">Seasonal development</li></ul></div>
+            <div><p class="sublabel" data-i="k3c">Our care includes</p><ul class="dots"><li data-i="k3c1">Soil improvement</li><li data-i="k3c2">Correct pruning</li><li data-i="k3c3">Lawn care</li><li data-i="k3c4">Seasonal planting</li><li data-i="k3c5">Fertilization</li><li data-i="k3c6">Tree and shrub management</li><li data-i="k3c7">Ground covers</li></ul></div>
+          </div>
+          <p class="tag" data-i="k3g">Observe early. Understand correctly. Care appropriately.</p>
+        </article>
+        <article class="card">
+          <img src="../../img/p09.jpg" alt="A sprinkler watering a lawn in morning light" loading="lazy">
+          <p class="eyebrow" data-i="k4e">Irrigation &amp; water management</p>
+          <h3 data-i="k4t">Every drop matters.</h3>
+          <p data-i="k4p">Water is one of the most critical factors in landscape health. Too little water causes stress and decline. Too much can be equally damaging. Our recommendations are based on what the landscape actually needs. Where specialist technical work is required, we identify the concern and coordinate with the appropriate expertise.</p>
+          <p class="sublabel" data-i="k4m">We monitor</p>
+          <ul class="dots cols2"><li data-i="k4m1">Irrigation performance</li><li data-i="k4m2">Water distribution</li><li data-i="k4m3">Irrigation scheduling</li><li data-i="k4m4">Seasonal adjustments</li></ul>
+          <p class="tag" data-i="k4g">The right water. In the right place. At the right time.</p>
+        </article>
+        <article class="card">
+          <img src="../../img/p10.jpg" alt="Tall palms and mature planting around a lawn" loading="lazy">
+          <p class="eyebrow" data-i="k5e">Design &amp; implementation</p>
+          <h3 data-i="k5t">Designed to live. Built to thrive.</h3>
+          <p data-i="k5p">We provide landscape design and implementation for new and existing properties. From complete new landscapes to focused transformations, we create outdoor environments that are refined, liveable, functional, and appropriate to their context.</p>
+          <p class="sublabel" data-i="k5m">Our work considers</p>
+          <ul class="dots cols2"><li data-i="k5m1">Architecture</li><li data-i="k5m2">Lifestyle</li><li data-i="k5m3">Climate</li><li data-i="k5m4">Plant selection</li><li data-i="k5m5">Irrigation requirements</li><li data-i="k5m6">Seasonal performance</li><li data-i="k5m7">Long-term maintenance</li></ul>
+          <p class="tag" data-i="k5g">We consider not only how a landscape looks on Day 1, but how it will grow, mature, and perform over time.</p>
+        </article>
+        <article class="card">
+          <img src="../../img/p11.jpg" alt="A mature resort garden with palms" loading="lazy">
+          <p class="eyebrow" data-i="k6e">Landscape enhancement</p>
+          <h3 data-i="k6t">Preserve. Refine. Enhance.</h3>
+          <p data-i="k6p">Not every garden needs to start again. Established gardens often contain valuable structure, mature planting, and character. Through selective enhancements, sensitive replanting, and careful refinement, we can bring fresh life to a mature landscape without losing its identity.</p>
+          <p class="sublabel" data-i="k6m">We assess</p>
+          <ul class="dots"><li data-i="k6m1">What is working</li><li data-i="k6m2">What should be preserved</li><li data-i="k6m3">What needs improvement</li><li data-i="k6m4">Where thoughtful interventions can elevate the landscape</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 Seasonal care -->
+  <section class="block band" id="seasonal">
+    <img class="mark" src="../../img/mark.png" alt="">
+    <div class="wrap">
+      <p class="eyebrow" data-i="z_e">Seasonal care</p>
+      <h2 data-i="z_t">A landscape is never static.</h2>
+      <p style="margin-top: 16px; max-width: 60ch" data-i="z_p">Landscapes respond to their environment every day. Temperature, sunlight, humidity, growth cycles, and flowering periods change throughout the year.</p>
+      <div class="factors">
+        <div data-i="z1">Temperature</div><div data-i="z2">Sunlight</div><div data-i="z3">Humidity</div><div data-i="z4">Growth cycles</div><div data-i="z5">Flowering periods</div>
+      </div>
+      <p style="margin-top: 32px" data-i="z_p2">Our maintenance programmes adapt to these seasonal rhythms.</p>
+      <p class="lead-accent gold" data-i="z_tag">As conditions change, our care changes with them.</p>
+    </div>
+  </section>
+
+  <!-- 13 How we work -->
+  <section class="block" id="process">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow" data-i="w_e">How we work</p>
+        <h2 data-i="w_t">A thoughtful process, consistently delivered.</h2>
+      </div>
+      <ol class="steps">
+        <li><h3 data-i="w1t">Assess</h3><p data-i="w1d">Understand the property, its condition, and client expectations.</p></li>
+        <li><h3 data-i="w2t">Plan</h3><p data-i="w2d">Develop a programme appropriate to the landscape.</p></li>
+        <li><h3 data-i="w3t">Care</h3><p data-i="w3d">Carry out scheduled works with professional supervision.</p></li>
+        <li><h3 data-i="w4t">Monitor</h3><p data-i="w4d">Continuously observe plant health, soil, and irrigation.</p></li>
+        <li><h3 data-i="w5t">Report</h3><p data-i="w5d">Communicate significant observations and recommendations clearly.</p></li>
+        <li><h3 data-i="w6t">Refine</h3><p data-i="w6d">Identify opportunities to continuously improve health and presentation.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 14 Our standards -->
+  <section class="block band" id="standards">
+    <img class="mark" src="../../img/mark.png" alt="">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow" data-i="o_e">Our standards</p>
+        <h2 data-i="o_t">Excellence is in the detail.</h2>
+      </div>
+      <div class="standards">
+        <div><h3 data-i="o1t">Knowledge</h3><p data-i="o1d">Informs every decision.</p></div>
+        <div><h3 data-i="o2t">Discretion</h3><p data-i="o2d">We respect our clients and their privacy.</p></div>
+        <div><h3 data-i="o3t">Consistency</h3><p data-i="o3d">Standards remain high throughout the year.</p></div>
+        <div><h3 data-i="o4t">Attention to Detail</h3><p data-i="o4d">Small elements shape the whole.</p></div>
+        <div><h3 data-i="o5t">Accountability</h3><p data-i="o5d">Clear supervision and communication.</p></div>
+        <div><h3 data-i="o6t">Long-Term Thinking</h3><p data-i="o6d">We consider the future health and value of every landscape.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 The Dew Drops difference -->
+  <section class="block" id="difference">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow" data-i="d_e">The Dew Drops difference</p>
+        <h2 data-i="d_t" data-html>Maintenance is what we do.<br>Stewardship is how we think.</h2>
+        <p data-i="d_p">A landscape is a living investment. Our role goes beyond its day-to-day appearance. We work to:</p>
+      </div>
+      <div class="diff">
+        <div data-i="d1">Protect its health.</div><div data-i="d2">Preserve its character.</div><div data-i="d3">Support its long-term development.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="block contact" id="contact" aria-labelledby="contactTitle">
+    <div class="wrap contact-inner">
+      <div>
+        <p class="eyebrow" data-i="f_e">Contact</p>
+        <h2 id="contactTitle" style="font-size: clamp(34px, 4.4vw, 56px); line-height: 1.08" data-i="f_t">Preserving the garden’s beauty, season after season.</h2>
+        <dl>
+          <div><dt data-i="f_locL">Location</dt><dd data-i="f_locV">Jeddah – Al Shatee District</dd></div>
+          <div><dt data-i="f_forL">We care for</dt><dd data-i="f_forV">Private residences, corporate properties, hotels, and resorts</dd></div>
+        </dl>
+      </div>
+      <form id="contactForm" novalidate>
+        <div class="field"><label for="name" data-i="fName">Full name</label><input id="name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="phone" data-i="fPhone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05X XXX XXXX" required></div>
+        <div class="field"><label for="ptype" data-i="fType">Property type</label>
+          <select id="ptype" name="ptype"><option data-i="pt1">Private residence</option><option data-i="pt2">Corporate or commercial property</option><option data-i="pt3">Hotel or resort</option></select></div>
+        <div class="field"><label for="service" data-i="fService">Service</label>
+          <select id="service" name="service">
+            <option data-i="sv1">Landscape maintenance</option><option data-i="sv2">Horticultural &amp; botanical care</option><option data-i="sv3">Irrigation &amp; water management</option>
+            <option data-i="sv4">Design &amp; implementation</option><option data-i="sv5">Landscape enhancement</option><option data-i="sv6">Seasonal care</option>
+          </select></div>
+        <div class="field full"><label for="notes" data-i="fNotes">Tell us about your landscape (optional)</label><textarea id="notes" name="notes"></textarea></div>
+        <div class="submit">
+          <button class="btn" type="submit" data-i="fSubmit">Send request</button>
+          <span class="note" data-i="fNote">Preview: this form does not send yet.</span>
+        </div>
+        <div class="done" id="done" hidden role="status" data-i="fDone">Thank you. In the live site your request goes straight to the Dew Drops team.</div>
+      </form>
+    </div>
+  </section>
+
+  <section class="block band closing">
+    <div class="wrap">
+      <img src="../../img/logo.png" alt="Dew Drops">
+      <p data-i="end">Preserving the garden’s beauty, season after season.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="../../img/logo.png" alt="Dew Drops">
+    <span data-i="foot1">Jeddah – Al Shatee District</span>
+    <span data-i="foot2">Presentation · Care · Management · Stewardship</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  // the growth film: three clips, upscaled frames (first frame of clips 2-3 repeats the previous last frame and is dropped)
+  const SEQ = [["c1", 145, 1], ["c2", 144, 2], ["c3", 144, 2]];
+  const pad = n => String(n).padStart(3, "0");
+  const srcs = [];
+  for (const [dir, count, start] of SEQ) for (let k = 0; k < count; k++) srcs.push(`../../frames/${dir}/${pad(start + k)}.webp`);
+  const FRAMES = srcs.length;
+  const canvas = document.getElementById("film");
+  const ctx = canvas.getContext("2d");
+  const frames = new Array(FRAMES);
+  let currentIndex = 0, progress = 0;
+  function load(i) { const im = new Image(); im.decoding = "async"; im.src = srcs[i]; im.onload = () => { if (Math.abs(i - currentIndex) < 3) draw(); }; frames[i] = im; }
+  load(0);
+  for (let i = 8; i < FRAMES; i += 8) load(i);
+  for (let i = 1; i < FRAMES; i++) if (!frames[i]) load(i);
+
+  const section = document.getElementById("filmSection");
+  const nav = document.getElementById("nav");
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const seg = (p, a, b) => clamp((p - a) / (b - a));
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(canvas.clientWidth * dpr);
+    canvas.height = Math.round(canvas.clientHeight * dpr);
+    draw();
+  }
+  function cover(im) {
+    const cw = canvas.width, ch = canvas.height;
+    const s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight);
+    const w = im.naturalWidth * s, h = im.naturalHeight * s;
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
+  }
+  function nearestFrame(i) {
+    for (let d = 0; d < FRAMES; d++) for (const j of [i - d, i + d]) { const f = frames[j]; if (f && f.complete && f.naturalWidth) return f; }
+    return null;
+  }
+  function draw() {
+    currentIndex = Math.round(seg(progress, 0.06, 0.94) * (FRAMES - 1));
+    const f = nearestFrame(currentIndex);
+    if (f) cover(f);
+  }
+  const chapters = [["c1", -1, 0.0, 0.05], ["c2", 0.14, 0.2, 0.34], ["c3", 0.44, 0.5, 0.64], ["c4", 0.84, 0.9, 2]];
+  const tracker = [...document.querySelectorAll(".tracker li")];
+  const hint = document.getElementById("hint");
+  function chapterOpacity(p, inA, inB, outA) {
+    const fadeIn = inA < 0 ? 1 : seg(p, inA, inB);
+    const fadeOut = 1 - seg(p, outA, outA + 0.05);
+    return clamp(Math.min(fadeIn, fadeOut));
+  }
+  function update() {
+    const r = section.getBoundingClientRect();
+    const total = section.offsetHeight - window.innerHeight;
+    progress = clamp(-r.top / total);
+    draw();
+    for (const [id, inA, inB, outA] of chapters) {
+      const el = document.getElementById(id);
+      const o = chapterOpacity(progress, inA, inB, outA);
+      el.style.opacity = o.toFixed(3);
+      el.style.transform = `translateY(${((1 - o) * 18).toFixed(1)}px)`;
+      el.classList.toggle("on", o > 0.5);
+    }
+    const stage = progress < 0.2 ? 0 : progress < 0.5 ? 1 : progress < 0.8 ? 2 : 3;
+    tracker.forEach((li, k) => li.classList.toggle("on", k === stage));
+    hint.style.opacity = progress < 0.03 ? 0.8 : 0;
+    nav.classList.toggle("solid", r.bottom <= 80);
+  }
+  let ticking = false;
+  addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { update(); ticking = false; }); } }, { passive: true });
+  addEventListener("resize", () => { resize(); update(); });
+  document.getElementById("scrollGrow").addEventListener("click", e => {
+    e.preventDefault();
+    scrollTo({ top: section.offsetTop + (section.offsetHeight - innerHeight) * 0.2, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+
+  // language: English is the profile's own wording; Arabic is a faithful translation of it
+  const AR = {
+    navServices: "خدماتنا", navProcess: "طريقة عملنا", navStandards: "معاييرنا", navContact: "تواصل معنا", ctaShort: "تواصل معنا",
+    c1e: "العرض · العناية · الإدارة · الرعاية المستدامة", c1t: "مساحات خضراء <em>بمستوى أرقى.</em>",
+    c1l: "نُنشئ مساحات خضراء استثنائية ونعتني بها في المساكن الخاصة والمقار التجارية والفنادق والمنتجعات.",
+    ctaLong: "تواصل معنا", ctaScroll: "مرّر للأسفل",
+    c2e: "الجمال يبدأ من الصحة", c2t: "جمال الحديقة يبدأ <em>من تحت السطح.</em>",
+    c2l: "حالة التربة والري والتغذية والضوء والمناخ وتغيّر الفصول، كلها تؤثر في نمو النباتات. فالحديقة لا يكفي أن تبدو جميلة، بل يجب أن تزدهر.",
+    c3e: "رؤيتكم محفوظة", c3t: "لكل حديقة <em>هويتها الخاصة.</em>", c3s: "استوائية · صحراوية · متوسطية · معاصرة · رسمية · طبيعية",
+    c3l: "ومع نضج الحدائق نطوّرها بعناية، لتنمو دون أن تفقد رؤيتها.",
+    c4e: "ما يميّز ديو دروبس", c4t: "الصيانة هي ما نقوم به. <em>والرعاية المستدامة هي طريقة تفكيرنا.</em>",
+    c4l: "الحديقة استثمار حيّ، ودورنا يتجاوز مظهرها اليومي.",
+    t1: "نفهم", t2: "نحمي", t3: "نطوّر", t4: "تزدهر", hint: "مرّر",
+    a_e: "أبعد من الصيانة", a_t: "الحديقة بيئة حيّة",
+    a_p1: "في ديو دروبس نؤمن بأن الصيانة الاستثنائية للمساحات الخضراء تتجاوز بكثير مجرد الحفاظ على جمال الحديقة.",
+    a_p2: "فالحديقة بيئة حيّة تحتاج إلى المعرفة والملاحظة والعناية المستمرة.", a_p3: "نجمع بين:",
+    a_b1: "الخبرة في علوم البستنة", a_b2: "الفهم التقني", a_b3: "الاهتمام الدقيق بالتفاصيل",
+    a_p4: "للحفاظ على صحة كل حديقة وطابعها وجمالها على المدى الطويل.", a_tag: "نفهم. نحمي. نطوّر باستمرار.",
+    h_e: "الجمال يبدأ من الصحة", h_t: "جمال الحديقة يبدأ من تحت السطح.",
+    h_p1: "حالة التربة والري والتغذية والضوء والمناخ وتغيّر الفصول، كلها تؤثر في نمو النباتات.",
+    h_p2: "ومن خلال مراقبة هذه العناصر باستمرار، نحرص على:",
+    h_b1: "اكتشاف المشكلات مبكرًا", h_b2: "الاستجابة بالشكل المناسب", h_b3: "دعم صحة النباتات على المدى الطويل",
+    h_tag: "فالحديقة لا يكفي أن تبدو جميلة، بل يجب أن تزدهر.",
+    r_e: "عناية بمستوى المنتجعات", r_t: "نقاء.<br>سكينة.<br>ثبات.",
+    r_p1: "نطبّق معايير المنتجعات الفاخرة على البيئات الخاصة والتجارية التي نديرها.",
+    r_p2: "كل عنصر مهم، من صحة النباتات وتكوينها إلى أدق اللمسات الأخيرة التي تصنع الانطباع العام.",
+    r_p3: "هدفنا أن نصنع بيئات تبدو:", r_tag: "جميلة بلا تكلّف، وجاهزة دائمًا للاستمتاع بها.",
+    v_e: "رؤيتكم محفوظة", v_t: "لكل حديقة هويتها الخاصة",
+    v_s: "استوائية · صحراوية · متوسطية<br>معاصرة · رسمية · طبيعية",
+    v_p1: "نأخذ وقتنا لفهم فكرة التصميم الأصلية وتفضيلات العميل الشخصية.",
+    v_tag: "ومع نضج الحدائق نطوّرها بعناية، لتنمو دون أن تفقد رؤيتها.",
+    s_e: "ما نقدّمه", s_t: "نُنشئ مساحات خضراء استثنائية ونعتني بها",
+    k1e: "المساكن الخاصة", k1t: "عناية استثنائية، بهدوء وتكتّم.",
+    k1p: "صيانة المسكن الخاص تتطلب أكثر من المهارة التقنية؛ تتطلب التكتّم والثبات واحترام بيئة العميل. تعمل فرقنا وفق جدولة دقيقة وإشراف مهني وبأقل قدر من الإزعاج.",
+    k1g: "معايير فاخرة للمساحات الخضراء، بخصوصية المنزل.",
+    k2e: "المقار التجارية والمؤسسية", k2t: "الانطباع الأول يبدأ من الخارج.",
+    k2p: "المساحات الخضراء المحيطة بالمبنى غالبًا ما تكون أول ما يراه الناس. نقدّم صيانة منظّمة للمساحات الخضراء في البيئات المؤسسية والتجارية، مع التركيز على:",
+    k2b1: "حسن المظهر", k2b2: "الموثوقية", k2b3: "الكفاءة", k2b4: "القيمة طويلة الأمد",
+    k3e: "العناية البستانية والنباتية", k3t: "أبعد من السطح.",
+    k3p: "برامج الصيانة لدينا مبنية حول صحة النباتات. وبدلًا من الاكتفاء بمعالجة الأعراض، نبحث عن الأسباب الجذرية.",
+    k3m: "نراقب", k3m1: "حالة التربة", k3m2: "احتياجات التقليم", k3m3: "علامات الآفات أو الأمراض", k3m4: "التغذية", k3m5: "النمو الموسمي",
+    k3c: "تشمل عنايتنا", k3c1: "تحسين التربة", k3c2: "التقليم الصحيح", k3c3: "العناية بالمسطحات الخضراء", k3c4: "الزراعة الموسمية", k3c5: "التسميد", k3c6: "إدارة الأشجار والشجيرات", k3c7: "النباتات المغطية للتربة",
+    k3g: "نلاحظ مبكرًا. نفهم بدقة. نعتني بالشكل المناسب.",
+    k4e: "الري وإدارة المياه", k4t: "كل قطرة لها قيمة.",
+    k4p: "المياه من أهم العوامل في صحة الحدائق؛ فقلّتها تسبب الإجهاد والتراجع، وزيادتها قد تكون بالضرر نفسه. توصياتنا مبنية على ما تحتاجه الحديقة فعلًا، وحين يتطلب الأمر عملًا تقنيًا متخصصًا نحدّد المشكلة وننسّق مع الخبرة المناسبة.",
+    k4m: "نراقب", k4m1: "أداء الري", k4m2: "توزيع المياه", k4m3: "جدولة الري", k4m4: "التعديلات الموسمية",
+    k4g: "الماء المناسب، في المكان المناسب، وفي الوقت المناسب.",
+    k5e: "التصميم والتنفيذ", k5t: "مصمَّمة لتُعاش. ومبنية لتزدهر.",
+    k5p: "نقدّم تصميم وتنفيذ المساحات الخضراء للعقارات الجديدة والقائمة. ومن المساحات الجديدة بالكامل إلى التحويلات المركّزة، نصنع بيئات خارجية راقية وصالحة للعيش وعملية ومنسجمة مع محيطها.",
+    k5m: "يراعي عملنا", k5m1: "العمارة", k5m2: "نمط الحياة", k5m3: "المناخ", k5m4: "اختيار النباتات", k5m5: "متطلبات الري", k5m6: "الأداء الموسمي", k5m7: "الصيانة طويلة الأمد",
+    k5g: "لا ننظر فقط إلى شكل الحديقة في يومها الأول، بل إلى كيف ستنمو وتنضج وتؤدي مع الوقت.",
+    k6e: "تطوير المساحات الخضراء", k6t: "نحافظ. نصقل. نطوّر.",
+    k6p: "ليست كل حديقة بحاجة إلى البدء من جديد؛ فالحدائق القائمة غالبًا ما تحمل هيكلًا قيّمًا ونباتات ناضجة وطابعًا خاصًا. ومن خلال تحسينات انتقائية وإعادة زراعة مدروسة وصقل دقيق، نعيد الحيوية إلى الحديقة الناضجة دون أن تفقد هويتها.",
+    k6m: "نقيّم", k6m1: "ما ينجح حاليًا", k6m2: "ما يجب الحفاظ عليه", k6m3: "ما يحتاج إلى تحسين", k6m4: "أين يمكن لتدخلات مدروسة أن ترتقي بالحديقة",
+    z_e: "العناية الموسمية", z_t: "الحديقة لا تبقى على حال.",
+    z_p: "تستجيب الحدائق لبيئتها كل يوم؛ فدرجات الحرارة وأشعة الشمس والرطوبة ودورات النمو وفترات الإزهار تتغيّر على مدار العام.",
+    z1: "الحرارة", z2: "أشعة الشمس", z3: "الرطوبة", z4: "دورات النمو", z5: "فترات الإزهار",
+    z_p2: "تتكيّف برامج الصيانة لدينا مع هذه الإيقاعات الموسمية.", z_tag: "ومع تغيّر الظروف، تتغيّر عنايتنا معها.",
+    w_e: "طريقة عملنا", w_t: "منهجية مدروسة، بأداء ثابت.",
+    w1t: "التقييم", w1d: "نفهم العقار وحالته وتوقعات العميل.", w2t: "التخطيط", w2d: "نضع برنامجًا يناسب الحديقة.",
+    w3t: "العناية", w3d: "ننفّذ الأعمال المجدولة بإشراف مهني.", w4t: "المتابعة", w4d: "نراقب باستمرار صحة النباتات والتربة والري.",
+    w5t: "التقارير", w5d: "نوضّح الملاحظات المهمة والتوصيات بوضوح.", w6t: "التطوير", w6d: "نحدّد فرص التحسين المستمر للصحة والمظهر.",
+    o_e: "معاييرنا", o_t: "التميّز في التفاصيل.",
+    o1t: "المعرفة", o1d: "أساس كل قرار.", o2t: "التكتّم", o2d: "نحترم عملاءنا وخصوصيتهم.", o3t: "الثبات", o3d: "معايير عالية على مدار العام.",
+    o4t: "الاهتمام بالتفاصيل", o4d: "التفاصيل الصغيرة تصنع الصورة الكاملة.", o5t: "المسؤولية", o5d: "إشراف واضح وتواصل واضح.",
+    o6t: "التفكير بعيد المدى", o6d: "نراعي صحة كل حديقة وقيمتها في المستقبل.",
+    d_e: "ما يميّز ديو دروبس", d_t: "الصيانة هي ما نقوم به.<br>والرعاية المستدامة هي طريقة تفكيرنا.",
+    d_p: "الحديقة استثمار حيّ، ودورنا يتجاوز مظهرها اليومي. نعمل على:",
+    d1: "حماية صحتها.", d2: "الحفاظ على طابعها.", d3: "دعم نموها على المدى الطويل.",
+    f_e: "تواصل معنا", f_t: "نحافظ على جمال الحديقة، موسمًا بعد موسم.",
+    f_locL: "الموقع", f_locV: "جدة – حي الشاطئ", f_forL: "نعتني بـ", f_forV: "المساكن الخاصة والمقار المؤسسية والفنادق والمنتجعات",
+    fName: "الاسم الكامل", fPhone: "رقم الجوال", fType: "نوع العقار", pt1: "مسكن خاص", pt2: "مقر مؤسسي أو تجاري", pt3: "فندق أو منتجع",
+    fService: "الخدمة", sv1: "صيانة المساحات الخضراء", sv2: "العناية البستانية والنباتية", sv3: "الري وإدارة المياه", sv4: "التصميم والتنفيذ", sv5: "تطوير المساحات الخضراء", sv6: "العناية الموسمية",
+    fNotes: "حدّثنا عن حديقتك (اختياري)", fSubmit: "أرسل الطلب", fNote: "معاينة: هذا النموذج لا يُرسل حاليًا.",
+    fDone: "شكرًا لك. في الموقع الفعلي يصل طلبك مباشرة إلى فريق ديو دروبس.",
+    end: "نحافظ على جمال الحديقة، موسمًا بعد موسم.",
+    foot1: "جدة – حي الشاطئ", foot2: "العرض · العناية · الإدارة · الرعاية المستدامة"
+  };
+  const EN = {};
+  document.querySelectorAll("[data-i]").forEach(el => { EN[el.dataset.i] = el.hasAttribute("data-html") || /<br>|<em>/.test(AR[el.dataset.i] || "") ? el.innerHTML : el.textContent; });
+  const langBtn = document.getElementById("lang");
+  function setLang(l) {
+    const dict = l === "ar" ? AR : EN;
+    document.documentElement.lang = l;
+    document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+    document.querySelectorAll("[data-i]").forEach(el => {
+      const v = dict[el.dataset.i]; if (v == null) return;
+      if (/<br>|<em>/.test(v) || el.hasAttribute("data-html")) el.innerHTML = v; else el.textContent = v;
+    });
+    langBtn.textContent = l === "ar" ? "English" : "العربية";
+    langBtn.setAttribute("aria-label", l === "ar" ? "Switch to English" : "التبديل إلى العربية");
+    try { localStorage.setItem("dew-lang", l); } catch (e) {}
+  }
+  langBtn.addEventListener("click", () => setLang(document.documentElement.lang === "ar" ? "en" : "ar"));
+  let saved = null; try { saved = localStorage.getItem("dew-lang"); } catch (e) {}
+  if (saved === "ar" || location.hash === "#ar") setLang("ar");
+
+  const form = document.getElementById("contactForm");
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const nameEl = document.getElementById("name"), phoneEl = document.getElementById("phone");
+    const name = nameEl.value.trim(), phone = phoneEl.value.replace(/\s/g, "");
+    let bad = null;
+    if (!name) bad = nameEl; else if (!/^(\+?966|0)?5\d{8}$/.test(phone)) bad = phoneEl;
+    nameEl.setAttribute("aria-invalid", String(!name));
+    phoneEl.setAttribute("aria-invalid", String(bad === phoneEl));
+    if (bad) { bad.focus(); return; }
+    document.getElementById("done").hidden = false;
+  });
+
+  resize(); update();
+})();
+</script>
+</body>
+</html>

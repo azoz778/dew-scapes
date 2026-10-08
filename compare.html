@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Dew Drops · Version comparison</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap">
+<style>
+:root { --green: #394F3D; --deep: #26352A; --paper: #F4F5F2; --ink: #26332B; --line: #D7DDD6; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--deep); font-family: "Jost", "Segoe UI", Arial, sans-serif; color: #fff; }
+.bar { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; padding: 12px 20px; background: var(--green); }
+.bar b { font-weight: 500; letter-spacing: 0.04em; }
+.bar label { font-size: 14px; display: flex; gap: 8px; align-items: center; }
+select, button { font: inherit; font-size: 14px; min-height: 38px; padding: 0 10px; background: #fff; color: var(--ink); border: 1px solid var(--line); }
+button { cursor: pointer; }
+.panes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; height: calc(100% - 62px); }
+.pane { display: flex; flex-direction: column; min-width: 0; background: #000; }
+.pane header { display: flex; justify-content: space-between; gap: 10px; padding: 8px 14px; font-size: 13.5px; background: var(--deep); }
+.pane header a { color: #DDC291; }
+iframe { flex: 1; width: 100%; border: 0; background: #fff; }
+@media (max-width: 800px) { .panes { grid-template-columns: minmax(0, 1fr); grid-auto-rows: minmax(70vh, 1fr); height: auto; } }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>Dew Drops website · side by side</b>
+  <label for="left">Left
+    <select id="left"><option value="versions/previous/index.html">Previous (Dew Drops, brochure style)</option><option value="versions/first/index.html">First concept (Dew Scapes)</option><option value="index.html">Current</option></select></label>
+  <label for="right">Right
+    <select id="right"><option value="index.html">Current</option><option value="versions/previous/index.html">Previous (Dew Drops, brochure style)</option><option value="versions/first/index.html">First concept (Dew Scapes)</option></select></label>
+  <button type="button" id="sync">Scroll both together: on</button>
+</div>
+<div class="panes">
+  <div class="pane"><header><span id="lName"></span><a id="lOpen" href="#" target="_blank" rel="noopener">Open full screen</a></header><iframe id="lf" title="Left version"></iframe></div>
+  <div class="pane"><header><span id="rName"></span><a id="rOpen" href="#" target="_blank" rel="noopener">Open full screen</a></header><iframe id="rf" title="Right version"></iframe></div>
+</div>
+<script>
+(() => {
+  const L = document.getElementById("left"), R = document.getElementById("right");
+  const lf = document.getElementById("lf"), rf = document.getElementById("rf");
+  let sync = true, lock = false;
+  function set(sel, frame, name, open) {
+    frame.src = sel.value;
+    document.getElementById(name).textContent = sel.options[sel.selectedIndex].text;
+    document.getElementById(open).href = sel.value;
+  }
+  // scroll the other pane to the same fraction of its page height
+  function link(a, b) {
+    a.addEventListener("load", () => {
+      a.contentWindow.addEventListener("scroll", () => {
+        if (!sync || lock) return;
+        const da = a.contentDocument.documentElement, db = b.contentDocument && b.contentDocument.documentElement;
+        if (!db) return;
+        const f = a.contentWindow.scrollY / Math.max(1, da.scrollHeight - a.contentWindow.innerHeight);
+        lock = true; b.contentWindow.scrollTo(0, f * (db.scrollHeight - b.contentWindow.innerHeight));
+        requestAnimationFrame(() => lock = false);
+      }, { passive: true });
+    });
+  }
+  link(lf, rf); link(rf, lf);
+  L.onchange = () => set(L, lf, "lName", "lOpen");
+  R.onchange = () => set(R, rf, "rName", "rOpen");
+  document.getElementById("sync").onclick = e => { sync = !sync; e.target.textContent = "Scroll both together: " + (sync ? "on" : "off"); };
+  set(L, lf, "lName", "lOpen"); set(R, rf, "rName", "rOpen");
+})();
+</script>
+</body>
+</html>
